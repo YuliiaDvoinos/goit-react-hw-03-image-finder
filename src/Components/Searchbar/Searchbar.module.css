@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: bisque;
+  padding: 20px;
 }
 .SearchFormInput {
   height: 30px;

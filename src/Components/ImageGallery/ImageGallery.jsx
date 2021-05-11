@@ -1,4 +1,4 @@
-// import propTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { createUseStyles } from "react-jss";
 import ImageGalleryItem from "../ImageGalleryItem";
 const useStyles = createUseStyles({
@@ -15,16 +15,16 @@ const ImageGallery = ({ images }) => {
   return (
     <ul className={styles.list}>
       {images.map(({ id, webformatURL, tags }) => {
-        return <ImageGalleryItem id={id} url={webformatURL} alt={tags} />;
+        return <ImageGalleryItem key={id} url={webformatURL} alt={tags} />;
       })}
     </ul>
   );
 };
 
-// ImageGallery.propTypes = {
-//     friends: propTypes.arrayOf(propTypes.shape({
-//         id: propTypes.number.isRequired
-//     }))
-// };
+ImageGallery.propTypes = {
+    images : propTypes.arrayOf(propTypes.shape({
+        id: propTypes.number.isRequired
+    }))
+};
 
 export default ImageGallery;

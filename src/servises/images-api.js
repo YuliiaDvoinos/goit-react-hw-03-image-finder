@@ -8,4 +8,4 @@ const fetchImages = ({ searchQuery = "", page = 1 }) => {
     .then((response) => response.data.hits);
 };
 
-export default { fetchImages };
+export default {fetchImages};
