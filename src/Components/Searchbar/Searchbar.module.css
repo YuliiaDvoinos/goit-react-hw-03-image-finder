@@ -1,0 +1,30 @@
+.Searchbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.SearchFormInput {
+  height: 30px;
+  width: 200px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid grey;
+  /* margin-right: 5px; */
+}
+.SearchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.SearchFormSubmitBtn {
+  outline: none;
+  padding: 0;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+
+  border: none;
+  background: transparent;
+}
