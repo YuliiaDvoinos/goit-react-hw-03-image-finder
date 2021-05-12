@@ -4,13 +4,11 @@ const useStyles = createUseStyles({
   image: {
     width: 250,
     height: 200,
-    transition: 'transform 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-    '&:hover': {
-      
-  transform: 'scale(1.03)',
-  cursor: 'zoom-in'
-}
-    
+    transition: "transform 250ms cubic-bezier(0.4, 0, 0.2, 1)",
+    "&:hover": {
+      transform: "scale(1.03)",
+      cursor: "zoom-in",
+    },
   },
   list__item: {
     marginTop: 10,
@@ -20,11 +18,17 @@ const useStyles = createUseStyles({
   },
 });
 
-const ImageGalleryItem = ({ url, alt }) => {
+const ImageGalleryItem = ({ url, alt, largeImageURL, onClick }) => {
   const styles = useStyles();
+
   return (
     <li className={styles.list__item}>
-      <img src={url} alt={alt} className={styles.image} />
+      <img
+        src={url}
+        alt={alt}
+        className={styles.image}
+        onClick={() => onClick(largeImageURL)}
+      />
     </li>
   );
 };

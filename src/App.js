@@ -5,10 +5,8 @@ import Container from "./Components/Container/Container";
 import Searchbar from "./Components/Searchbar";
 import ImageGallery from "./Components/ImageGallery";
 import LoadMoreBtn from "./Components/LoadMoreBtn";
-import Spinner from './Components/Spinner';
-// import Modal from'./Components/Modal'
-
-
+import Spinner from "./Components/Spinner";
+import Modal from "./Components/Modal";
 
 class App extends Component {
   state = {
@@ -17,6 +15,20 @@ class App extends Component {
     searchQuery: "",
     isLoading: false,
     error: null,
+    showModal: false,
+    modalImageURL: "",
+  };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchQuery !== this.state.searchQuery) {
+      this.fetchImages();
+    }
+  }
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
+  onImgFocus = (url) => {
+    this.setState({ modalImageURL: url });
+    this.toggleModal();
   };
   fetchImages = () => {
     const { page, searchQuery } = this.state;
@@ -49,31 +61,28 @@ class App extends Component {
     });
     // this.fetchImages();
   };
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchQuery !== this.state.searchQuery) {
-      this.fetchImages();
-    }
-  }
 
   render() {
-    const { images, isLoading, error } = this.state;
+    const { images, isLoading, error, showModal, modalImageURL } = this.state;
     const shouldBtnRender = images.length > 0 && !isLoading;
     return (
-
       <div className="App">
-        
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <img src={modalImageURL} />
+          </Modal>
+        )}
         <Container>
           <>
             <Searchbar onSubmit={this.onChangeQuery} />
-              {error && <h2>error {error}</h2>}
-             
-            <ImageGallery images={images} />
-            
-            {isLoading && <Spinner/>}
+            {error && <h2>error {error}</h2>}
+
+            <ImageGallery images={images} onClick={this.onImgFocus} />
+
+            {isLoading && <Spinner />}
             {shouldBtnRender && <LoadMoreBtn loadMore={this.fetchImages} />}
           </>
-          </Container>
-          
+        </Container>
       </div>
     );
   }
